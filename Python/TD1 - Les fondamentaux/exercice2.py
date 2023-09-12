@@ -2,7 +2,7 @@
 # Nous souhaitons réaliser un programme d’un jeu simple, ce jeu permet à un utilisateur de deviner un nombre aléatoire choisi par le programme.
 import random
 nombreMax = int(input("Veuillez donner un nombre limite :"))
-nombreDeBase = random.randint(1,nombreMax)
+nombreDeBase = random.randint(1, nombreMax)
 print("Vous devez deviner le nombre aléatoire entre 1 et " + str(nombreMax))
 
 i = 0
