@@ -10,32 +10,33 @@ def serveur():
   s.bind((host, port))
   s.listen()
   s_client, adresse = s.accept()
-  print(adresse)
-  return s, s_client, adresse
+  print("Client " + str(adresse) + " s'est connecté")
+  s_client.send(("Client " + str(adresse) + " s'est connecté\r\n").encode()) #1
+  return s, s_client
 
-def juste_prix(s, s_client, adresse):
-  s_client.send(b"Veuillez donner un nombre limite\r\n")
-  nombreMax = int(s_client.recv(32).decode())
-  nombreDeBase = random.randint(1, nombreMax)
-  s_client.send((b"Vous devez deviner le nombre aléatoire entre 1 et " + str(nombreMax) + "\r\n").encode())
+def juste_prix(s, s_client):
+  s_client.send(b"Veuillez donner un nombre limite\r\n") #2
+  nombreMax = s_client.recv(128).decode() #2
+  nombreDeBase = random.randint(1, int(nombreMax))
+  s_client.send(("Vous devez deviner le nombre aléatoire entre 1 et " + str(nombreMax) + "\r\n").encode())
 
   i = 0
   nombreUtilisateur = 0
   while int(nombreUtilisateur) != nombreDeBase:
     i += 1
     s_client.send(b"Donner un nombre : \r\n")
-    nombreUtilisateur = int(input(s_client.recv(32).decode()))
+    nombreUtilisateur = int(input(s_client.recv(128).decode()))
     if(int(nombreUtilisateur) < nombreDeBase):
       s_client.send(b"Plus !\r\n")
     elif(int(nombreUtilisateur) > nombreDeBase):
       s_client.send(b"Moins !\r\n")
 
-  s_client.send((b"Vous avez trouvé le nombre en " + str(i) + " tentatives\r\n").encode())
+  s_client.send(("Vous avez trouvé le nombre en " + str(i) + " tentatives\r\n").encode())
   s_client.close()
   s.close()
 
 def main():
-  s, s_client, adresse = serveur()
-  juste_prix(s, s_client, adresse)
+  s, s_client = serveur()
+  juste_prix(s, s_client)
 
 main()
