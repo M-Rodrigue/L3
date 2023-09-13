@@ -1,10 +1,32 @@
-# Exercice 4 - Gestion des dates/jours de l’année
+# Exercice 4 - Gestion des dates/jours de l'année
+jours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche']
+mois = ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre']
+nombres_jours = [31,28,31,30,31,30,31,31,30,31,30,31]
 
-Jours=[‘Lundi’,’Mardi’,’Mercredi’,’Jeudi’,’vendredi’,’Samedi’,’Dimanche’]
-Mois=
-[‘Janvier’,’Fevrier’,’Mars’,’Avril’,’Mai’,’Juin’,’Juillet’,’Aout’,’Spetembre’,’Octobre’,’Novembre’,
-’Decembre’]
-Nbr_j=[31,28,31,30,31,30,31,31,30,31,30,31]
+def jourAnnee(jours, mois, nombres_jours):
+    l = []
+
+
+############################# CORRECTION CHATGPT ###############################
+def determinationJour(jour, mois):
+  mois_jours = (("Janvier", 31), ("Février", 28), ("Mars", 31), ("Avril", 30),("Mai", 31), ("Juin", 30), ("Juillet", 31), ("Août", 31),("Septembre", 30), ("Octobre", 31), ("Novembre", 30), ("Décembre", 31))
+  jours_semaine = ("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
+
+  try:
+    mois_index = [m[0] for m in mois_jours].index(mois)
+    jours_du_mois = mois_jours[mois_index][1]
+    total_jours = sum([m[1] for m in mois_jours])
+    jour_de_la_semaine = (jour - 1 + total_jours) % 7
+    return jours_semaine[jour_de_la_semaine]
+  except ValueError:
+    return "Date invalide"
+
+if __name__ == "__main__":
+  jour = int(input("Veuillez entrer un jour (ex. 15) : "))
+  mois = input("Veuillez entrer un mois (ex. Janvier) : ")
+
+  jour_semaine = determinationJour(jour, mois.capitalize())
+  print(f"Le {jour} {mois} est un {jour_semaine}")
 
 ############################# CORRECTION ###############################
 def jourAnnee(j,m,n):
