@@ -10,4 +10,6 @@ for i in range(0, 5):
   for r in rep:
     if r[1].type == 0
     duration = time.time() - t
-    duration
+    duration = str(duration).split(".")
+    duration = duration[0] + "." + duration[1][:3]
+    print("[UP] [%s] in %s ms" % (ipToTest, duration))
