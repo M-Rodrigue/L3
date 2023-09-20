@@ -3,23 +3,23 @@ import os, re, shutil, socket, ipaddress
 
 # Fonction pour rechercher les documents JPG et TXT
 def recherche():
-  pattern = r'\w+\.(jpg|txt)' # Filtre tous les fichiers en jpg et txt avec 'r' pour raw string
+  pattern = r'\w+\.(jpg|txt)' # Filtre tous les (.jpg|.txt), 'r' pour raw string et w+ -> [a-zA-Z0-9_]
   chemin = input("Entrer le chemin à parcourir : ")
   regex = re.compile(pattern)
-  listeRecherche = []
+  listeRecherche = [] # Liste qui contient la recherche
 
   # Boucle pour chercher tous les documents et leurs chemins
   for chemin, _, fichiers in os.walk(chemin):
     for fichier in fichiers:
       if regex.match(fichier):
-        listeRecherche.append(os.path.join(chemin, fichier))
+        listeRecherche.append(os.path.join(chemin, fichier)) # Rajoute les résultat dans la liste
 
   # Boucle pour afficher tous les résultats
   print("Fichiers trouvées : ")
   for resultat in listeRecherche:
     print("- " + resultat)
 
-  return listeRecherche
+  return listeRecherche # Retourne la liste avec tous les résultats
 
 # Fonction pour trier les images dans un dossier
 def trieImages(listeRecherche):
@@ -28,20 +28,20 @@ def trieImages(listeRecherche):
   if not os.path.exists("Photos"):
     os.makedirs("Photos")
 
-  # Filtre les JPG
+  # Filtre les JPG à partir de la listeRecherche
   for fichier in listeRecherche:
-    if fichier[-3:] == "jpg":
-      shutil.move(fichier, "/Users/mrodrigue/Desktop/Projets/L3/Python/TP2 - Forensic et réseau/Photos")
+    if fichier[-3:] == "jpg": # Vérifie l'extension jpg
+      shutil.move(fichier, "/Users/mrodrigue/Desktop/Projets/L3/Python/TP2 - Forensic et réseau/Photos") # Déplacement du fichier vers le dossier Photos
 
 # Fonction pour trouver des adresses IP dans un fichier txt
 def trieTextes(listeRecherche):
 
-  # Filtre les TXT pour trouver les IP
+  # Filtre les TXT depuis la listeRecherche pour trouver les IP
   for fichier in listeRecherche:
-    if fichier[-3:] == "txt":
+    if fichier[-3:] == "txt": # Vérifie l'extension txt
       with open(fichier, 'r') as texte:
         contenu = texte.read()
-        pattern = r"\b(?:\d{1,3}\.){3}\d{1,3}\b"
+        pattern = r"\b(?:\d{1,3}\.){3}\d{1,3}\b" # Expression régulière pour trouver une IPv4 dans du texte
         listeIP = re.findall(pattern, contenu)
 
   # Affiche les adresses IP et l'IP locale
@@ -54,18 +54,18 @@ def trieTextes(listeRecherche):
   else:
     print("Aucune adresse IP trouvée")
 
-  return listeIP
+  return listeIP # Retourne la listeIP
 
 # Fonction pour trier les adresses IP
 def trieIP(listeIP):
-  localeIP = ipaddress.IPv4Network(socket.gethostbyname(socket.gethostname()), strict = False)
+  localeIP = ipaddress.IPv4Network(socket.gethostbyname(socket.gethostname()), strict = False) # Récupère l'IP locale et transforme en objet
 
   # Filtre les IP LAN
   if listeIP:
     print("\nAdresse IP LAN :")
     for ip in listeIP:
-      lanIP = ipaddress.IPv4Network(ip, strict = False)
-      if localeIP.network_address.exploded[:3] == lanIP.network_address.exploded[:3]:
+      lanIP = ipaddress.IPv4Network(ip, strict = False) # Transforme les IP en objet
+      if localeIP.network_address.exploded[:3] == lanIP.network_address.exploded[:3]: # Comparaison avec l'IP locale
         print(f"- {lanIP}")
   else:
     print("\nAucune adresse IP trouvée")
