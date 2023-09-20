@@ -1,0 +1,25 @@
+Adresses IP Privées (utilisées dans des réseaux locaux ou privés) :
+
+1. 192.168.0.1
+2. 10.0.0.1
+3. 172.16.0.1
+4. 192.168.1.100
+5. 10.1.1.1
+6. 172.16.31.254
+7. 192.168.2.50
+8. 10.0.0.2
+9. 172.17.0.10
+10. 192.168.10.100
+
+Adresses IP Publiques (utilisées sur Internet) :
+
+1. 203.0.113.1
+2. 8.8.8.8 (adresse IP du serveur DNS public de Google)
+3. 64.233.191.255 (adresse IP de google.com)
+4. 13.107.21.200 (adresse IP de Microsoft.com)
+5. 185.60.218.35 (adresse IP de Facebook.com)
+6. 104.244.42.129 (adresse IP de Twitter.com)
+7. 151.101.65.121 (adresse IP de GitHub.com)
+8. 173.194.222.113 (adresse IP de YouTube.com)
+9. 198.41.0.4 (adresse IP de Cloudflare DNS)
+10. 192.0.2.1 (adresse IP de documentation et d'exemple, réservée pour les manuels)
