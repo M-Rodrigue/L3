@@ -1,10 +1,10 @@
-create table employe(
-	id_emp int not null,
-  	nom varchar(30) not null,
-  	prenom varchar(30) not null,
-  	sexe char(1) not null,
-  	service varchar(30),
-  	salaire int,
-  	dtContrat date,
-  	primary key(id_emp)
+CREATE TABLE employe(
+	id_emp INT NOT NULL,
+  	nom VARCHAR(30) NOT NULL,
+  	prenom VARCHAR(30) NOT NULL,
+  	sexe CHAR(1) NOT NULL,
+  	service VARCHAR(30),
+  	salaire INT,
+  	dtContrat DATE,
+  	PRIMARY KEY(id_emp)
 );

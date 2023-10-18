@@ -1,0 +1,1 @@
+SELECT salaire AS salaireMin FROM employe ORDER BY salaireMin ASC LIMIT 1;

@@ -1,0 +1,1 @@
+SELECT prenom FROM employe ORDER BY salaire DESC LIMIT 1 OFFSET 1;

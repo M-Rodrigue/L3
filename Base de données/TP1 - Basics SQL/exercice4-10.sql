@@ -1,0 +1,1 @@
+SELECT service FROM employe ORDER BY salaire DESC LIMIT 1;

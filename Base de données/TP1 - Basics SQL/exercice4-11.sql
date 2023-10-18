@@ -1,0 +1,1 @@
+UPDATE employe SET salaire = salaire * 1.1;

@@ -1,0 +1,1 @@
+SELECT nom, prenom FROM employe WHERE salaire > 15000;

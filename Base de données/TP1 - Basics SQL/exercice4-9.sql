@@ -1,0 +1,1 @@
+SELECT service FROM employe WHERE salaire LIKE 8500;

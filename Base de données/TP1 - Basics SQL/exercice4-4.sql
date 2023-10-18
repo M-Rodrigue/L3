@@ -1,0 +1,1 @@
+SELECT DISTINCT(nom) FROM employe ORDER BY nom ASC;

@@ -1,0 +1,1 @@
+SELECT nom, prenom FROM employe ORDER BY dtContrat ASC;

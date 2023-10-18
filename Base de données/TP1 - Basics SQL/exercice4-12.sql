@@ -1,0 +1,1 @@
+DELETE FROM employe WHERE service IS NULL;

@@ -1,0 +1,1 @@
+SELECT nom, prenom FROM employe WHERE service LIKE 'Marketing' ORDER BY nom ASC;

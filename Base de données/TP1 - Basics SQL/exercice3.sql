@@ -1,4 +1,4 @@
-insert into employe (id_emp, nom, prenom, sexe, service, salaire, dtContrat) values
+INSERT INTO employe (id_emp, nom, prenom, sexe, service, salaire, dtContrat) VALUES
 	(1, 'DUPONT', 'Robert', 'M', 'Marketing', 20000, '21-03-2010'),
 	(2, 'DUPONT', 'Aline', 'F', 'Communication', 8500, '11-11-2013'),
 	(3, 'DURAND', 'Laurence', 'F', 'Marketing', 14000, '02-01-1996'),
