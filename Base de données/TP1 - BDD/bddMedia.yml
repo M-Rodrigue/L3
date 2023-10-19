@@ -1,0 +1,114 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Project bddMedia {
+  database_type: 'MySQL'
+  Note: 'Vous devez créer une base de données qui vous permette de lister l\'ensemble de vos médias.'
+
+  Table personne {
+    id integer [primary key, not null, increment]
+    nom varchar(64) [not null]
+    prenom varchar(64) [not null]
+    role varchar(64) [note: 'Chanteur, auteur, réalisateur ou acteur.', not null]
+    note: 'Contient l\'ensemble des personnes.'
+  }
+
+  Table genre {
+    id integer [primary key, not null, increment]
+    type varchar(64) [not null]
+    note: 'Contient l\'ensemble des genres sur chaque média.'
+  }
+
+  Table note {
+    id integer [primary key, not null, increment]
+    evaluation double [not null, default: 0, note: 'Une note de 0 jusqu\'à 5.']
+    commentaire text [default: NULL, note: 'Contient un commentaire par rapport au média.']
+    note: 'Contient l\'ensemble des commentaires et des évaluations sur chaque média.'
+  }
+
+  Table langue {
+    id integer [primary key, not null, increment]
+    audio varchar(64) [default: NULL]
+    sous_titre varchar(64) [default: NULL]
+    ecriture varchar(64) [default: NULL]
+    note: 'Contient les langues employées par les médias.'
+  }
+
+  Table assignation {
+    personne_id integer [not null, note: 'Référence à une personne.']
+    media_id integer [not null, note: 'Référence à un média.']
+    indexes {
+      (personne_id, media_id) [pk]
+    }
+    note: 'Permet de lier chaque personne à chaque film.'
+  }
+
+  Table film {
+    id integer [primary key, not null, increment]
+    titre varchar(128) [not null]
+    genre_id integer [not null, note: 'Référence au genre.']
+    note_id integer [not null, note: 'Référence à la note.']
+    sortie date [not null]
+    langue_id integer [not null, note: 'Référence à la langue.']
+    description text [default: NULL]
+    note: 'Référence chaque film.'
+  }
+
+  Table video {
+    id integer [primary key, not null, increment]
+    titre varchar(128) [not null]
+    genre_id integer [not null, note: 'Référence au genre.']
+    note_id integer [not null, note: 'Référence à la note.']
+    sortie date [not null]
+    langue_id integer [not null, note: 'Référence à la langue.']
+    description text [default: NULL]
+    note: 'Référence chaque vidéo.'
+  }
+
+  Table musique {
+    id integer [primary key, not null, increment]
+    titre varchar(128) [not null]
+    genre_id integer [not null, note: 'Référence au genre.']
+    note_id integer [not null, note: 'Référence à la note.']
+    sortie date [not null]
+    langue_id integer [not null, note: 'Référence à la langue.']
+    description text [default: NULL]
+    note: 'Référence chaque musique.'
+  }
+
+  Table livre {
+    id integer [primary key, not null, increment]
+    titre varchar(128) [not null]
+    genre_id integer [not null, note: 'Référence au genre.']
+    note_id integer [not null, note: 'Référence à la note.']
+    sortie date [not null]
+    langue_id integer [not null, note: 'Référence à la langue.']
+    description text [default: NULL]
+    note: 'Référence chaque livre.'
+  }
+
+  // Références table asignation
+  ref: personne.id > assignation.personne_id [delete: cascade]
+  ref: assignation.media_id > video.id [delete: cascade]
+  ref: assignation.media_id > film.id [delete: cascade]
+  ref: assignation.media_id > musique.id [delete: cascade]
+  ref: assignation.media_id > livre.id [delete: cascade]
+
+  // Références table genre
+  ref: genre.id - video.genre_id [delete: cascade]
+  ref: genre.id - film.genre_id [delete: cascade]
+  ref: genre.id - musique.genre_id [delete: cascade]
+  ref: genre.id - livre.genre_id [delete: cascade]
+
+  // Références table note
+  ref: note.id - video.note_id [delete: cascade]
+  ref: note.id - film.note_id [delete: cascade]
+  ref: note.id - musique.note_id [delete: cascade]
+  ref: note.id - livre.note_id [delete: cascade]
+
+  // Références table langue
+  ref: langue.id - video.langue_id [delete: cascade]
+  ref: langue.id - film.langue_id [delete: cascade]
+  ref: langue.id - musique.langue_id [delete: cascade]
+  ref: langue.id - livre.langue_id [delete: cascade]
+}
